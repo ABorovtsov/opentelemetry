@@ -8,8 +8,8 @@ namespace opentelemetry.console
     {
         static void Main(string[] args)
         {
-            var startup = new PlainStartup();
-            //var startup = new OtelStartup();
+            //var startup = new PlainStartup();
+            var startup = new OtelStartup();
 
             var host = Host.CreateDefaultBuilder(args)
                 .ConfigureServices(startup.ConfigureServices)

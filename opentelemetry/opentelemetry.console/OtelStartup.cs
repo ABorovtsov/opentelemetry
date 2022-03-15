@@ -1,4 +1,6 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using System.Diagnostics;
+using System.Reflection;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using opentelemetry.biz;
 using OpenTelemetry.Logs;
@@ -9,9 +11,19 @@ namespace opentelemetry.console
     {
         public void ConfigureServices(IServiceCollection services)
         {
+            var appName = Assembly.GetEntryAssembly()?.GetName().Name ?? "opentelemetry";
+            var activityListener = new ActivityListener
+            {
+                ShouldListenTo = s => true,
+                SampleUsingParentId = (ref ActivityCreationOptions<string> activityOptions) => ActivitySamplingResult.AllData,
+                Sample = (ref ActivityCreationOptions<ActivityContext> activityOptions) => ActivitySamplingResult.AllData
+            };
+            var activitySource = new ActivitySource(appName);
+            ActivitySource.AddActivityListener(activityListener);
+            
             services.AddTransient<IService, Service>(provider => 
                     new Service(provider.GetRequiredService<ILogger<Service>>(),
-                        new Dependent(provider.GetRequiredService<ILogger<Dependent>>())))
+                        new Dependent(provider.GetRequiredService<ILogger<Dependent>>(), activitySource), activitySource))
 
                 // Logs
                 .AddLogging(builder =>
