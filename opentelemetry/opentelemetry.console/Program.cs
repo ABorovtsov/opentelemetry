@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using System;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using opentelemetry.biz;
 
@@ -15,8 +16,17 @@ namespace opentelemetry.console
                 .ConfigureServices(startup.ConfigureServices)
                 .Build();
             var service = host.Services.GetRequiredService<IService>();
-            
-            service.Serv();
+
+
+            while (true)
+            {
+                service.Serv();
+
+                if (Console.ReadLine()?.ToLower() == "q")
+                {
+                    break;
+                }
+            }
         }
     }
 }

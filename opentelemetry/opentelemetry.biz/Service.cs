@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
-using System.Runtime.InteropServices;
 using Microsoft.Extensions.Logging;
 
 namespace opentelemetry.biz
@@ -23,12 +22,21 @@ namespace opentelemetry.biz
 
         public void Serv()
         {
-            using var activity = _activitySource.StartActivity($"{nameof(Service)} -> {MethodBase.GetCurrentMethod()?.Name}", ActivityKind.Server);
-            activity?.SetTag("name", "tomato");
+            var methodName = GetFullMethodName(MethodBase.GetCurrentMethod());
+
+            using var activity = _activitySource.StartActivity(methodName, ActivityKind.Server);
+            activity?.SetTag("name", "tomato1");
+            activity?.SetTag("name", "tomato2");
+            activity?.AddTag("name", "tomato3");
             _dependent.Serv();
 
             _logger.LogInformation("Hello from {name} {price}. Events: {events}", "tomato", 2.99, 
                 string.Join(',', activity?.Events.Select(e=>e.Name) ?? new List<string>()));
+        }
+
+        public string GetFullMethodName(MethodBase m)
+        {
+            return $"{m?.DeclaringType?.Name}.{m?.Name}";
         }
     }
 }
