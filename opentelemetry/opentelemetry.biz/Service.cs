@@ -24,14 +24,18 @@ namespace opentelemetry.biz
         {
             var methodName = GetFullMethodName(MethodBase.GetCurrentMethod());
 
+            using var scope = _logger.BeginScope(new Dictionary<string, object>
+            {
+                ["CustomerId"] = 12345,
+                ["OrderId"] = 54
+            });
             using var activity = _activitySource.StartActivity(methodName, ActivityKind.Server);
-            activity?.SetTag("name", "tomato1");
             activity?.SetTag("name", "tomato2");
             activity?.AddTag("name", "tomato3");
             _dependent.Serv();
 
-            _logger.LogInformation("Hello from {name} {price}. Events: {events}", "tomato", 2.99, 
-                string.Join(',', activity?.Events.Select(e=>e.Name) ?? new List<string>()));
+            _logger.LogInformation("Hello from {name} {price}. Events: {events}", "tomato", 2.99,
+                string.Join(',', activity?.Events.Select(e => e.Name) ?? new List<string>()));
         }
 
         public string GetFullMethodName(MethodBase m)

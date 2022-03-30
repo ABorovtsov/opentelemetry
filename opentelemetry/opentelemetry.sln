@@ -1,11 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.1.32210.238
+VisualStudioVersion = 17.1.32319.34
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "opentelemetry.console", "opentelemetry.console\opentelemetry.console.csproj", "{5ECDBB56-D6FD-4527-B360-946CA4AA48BC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "opentelemetry.console", "opentelemetry.console\opentelemetry.console.csproj", "{5ECDBB56-D6FD-4527-B360-946CA4AA48BC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "opentelemetry.biz", "opentelemetry.biz\opentelemetry.biz.csproj", "{CD47F5D7-7DAD-4982-8F60-48195942712E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "opentelemetry.biz", "opentelemetry.biz\opentelemetry.biz.csproj", "{CD47F5D7-7DAD-4982-8F60-48195942712E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "opentelemetry.webapi", "opentelemetry.webapi\opentelemetry.webapi.csproj", "{A07EA507-B11D-4C87-93B4-88A3FA5A2D58}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "trace.console", "trace.console\trace.console.csproj", "{368C042B-AD80-4E1C-9810-B978696C4D45}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +25,14 @@ Global
 		{CD47F5D7-7DAD-4982-8F60-48195942712E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CD47F5D7-7DAD-4982-8F60-48195942712E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CD47F5D7-7DAD-4982-8F60-48195942712E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A07EA507-B11D-4C87-93B4-88A3FA5A2D58}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A07EA507-B11D-4C87-93B4-88A3FA5A2D58}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A07EA507-B11D-4C87-93B4-88A3FA5A2D58}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A07EA507-B11D-4C87-93B4-88A3FA5A2D58}.Release|Any CPU.Build.0 = Release|Any CPU
+		{368C042B-AD80-4E1C-9810-B978696C4D45}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{368C042B-AD80-4E1C-9810-B978696C4D45}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{368C042B-AD80-4E1C-9810-B978696C4D45}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{368C042B-AD80-4E1C-9810-B978696C4D45}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
