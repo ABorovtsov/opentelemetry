@@ -32,15 +32,28 @@ namespace ConsoleApp1
 
         private static string ConfugureTracing()
         {
-            Trace.Listeners.Clear();
+            // The config below gives such output in the Dbg View tool
+
+                //[28596] ----DEBUG ASSERTION FAILED ----
+                //[28596]---- Assert Short Message----
+                //[28596] 1 > 2 is not true
+                //[28596]---- Assert Long Message----
+                //[28596]
+                //[28596]    at ConsoleApp1.Program.Main(String[] args) in C: \Users\aborovtsov\source\repos\opentelemetry\opentelemetry\trace.console\Program.cs:line 17
+                //[28596]
+                //[28596] It's me: ping 
+
+
             var directoryFullName = new FileInfo(Assembly.GetEntryAssembly().Location).Directory.FullName;
             var outputFile = directoryFullName + @"\trace\log.txt";
             var textWriterTraceListener = new TextWriterTraceListener(outputFile);
             
+            Trace.Listeners.Clear();
             Trace.Listeners.Add(textWriterTraceListener);
             Trace.Listeners.Add(new ConsoleTraceListener());
-
+            Trace.Listeners.Add(new DefaultTraceListener() {AssertUiEnabled = false}); // it uses "Interop.Kernel32.OutputDebugString"
             Trace.AutoFlush = true;
+
             return outputFile; 
         }
     }
